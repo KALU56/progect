@@ -3,9 +3,18 @@ import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/o
 
 const Header = ({ toggleSidebar, isSidebarOpen }) => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  const handleCloseDropdown = () => {
+    setIsProfileDropdownOpen(false);
+  };
+
+  const handleSearchClick = () => {
+    setIsSearchActive(!isSearchActive);
   };
 
   const handleOptionClick = (option) => {
@@ -13,12 +22,9 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
     setIsProfileDropdownOpen(false);
   };
 
-  const handleCloseDropdown = () => {
-    setIsProfileDropdownOpen(false);
-  };
-
   return (
     <div className="w-full bg-gray-800 text-white flex items-center justify-between px-4 h-16 relative">
+      
       {/* Sidebar Toggle Button */}
       <button onClick={toggleSidebar}>
         {isSidebarOpen ? (
@@ -31,10 +37,20 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
       <span className="text-2xl font-bold ml-4">Lilu Glass</span>
 
       <div className="flex items-center space-x-4 relative">
+        
         {/* Search Icon */}
-        <button>
+        <button onClick={handleSearchClick}>
           <MagnifyingGlassIcon className="h-6 w-6" />
         </button>
+
+        {/* Search Input Bar (appears when clicking search icon) */}
+        {isSearchActive && (
+          <input
+            type="text"
+            placeholder="Search..."
+            className="ml-2 px-2 py-1 rounded bg-gray-700 text-white focus:outline-none"
+          />
+        )}
 
         {/* Profile Placeholder Image */}
         <button onClick={handleProfileClick}>
@@ -70,6 +86,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
             </ul>
           </div>
         )}
+        
       </div>
     </div>
   );
