@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { UserIcon } from "@heroicons/react/24/solid";
 
 const Header = ({ toggleSidebar, isSidebarOpen }) => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -10,7 +11,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
 
   const handleOptionClick = (option) => {
     alert(`${option} option clicked`);
-    setIsProfileDropdownOpen(false);  // Close dropdown after selecting an option
+    setIsProfileDropdownOpen(false);
   };
 
   const handleCloseDropdown = () => {
@@ -19,7 +20,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
 
   return (
     <div className="w-full bg-gray-800 text-white flex items-center justify-between px-4 h-16 relative">
-      {/* Toggle Sidebar Button */}
+      {/* Sidebar Toggle Button */}
       <button onClick={toggleSidebar}>
         {isSidebarOpen ? (
           <XMarkIcon className="h-6 w-6" />
@@ -38,7 +39,9 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
 
         {/* Profile Icon */}
         <button onClick={handleProfileClick}>
-          <UserCircleIcon className="h-8 w-8" />
+          <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
+            <UserIcon className="h-6 w-6 text-white" />
+          </div>
         </button>
 
         {/* Profile Dropdown */}
