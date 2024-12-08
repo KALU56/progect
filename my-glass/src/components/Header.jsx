@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { UserIcon } from "@heroicons/react/24/solid";
 
 const Header = ({ toggleSidebar, isSidebarOpen }) => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -37,10 +36,14 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
           <MagnifyingGlassIcon className="h-6 w-6" />
         </button>
 
-        {/* Profile Icon with fixed dimensions */}
+        {/* Profile Placeholder Image */}
         <button onClick={handleProfileClick}>
-          <div className="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
-            <UserIcon className="h-6 w-6 text-white" />
+          <div className="h-10 w-10 rounded-full bg-gray-700 overflow-hidden flex items-center justify-center">
+            <img
+              src="https://media.istockphoto.com/id/1496615764/photo/cheerful-young-woman-with-eyeglasses-smiling-and-looking-at-camera.jpg"
+              alt="Portfolio"
+              className="h-full w-full object-cover"
+            />
           </div>
         </button>
 
@@ -55,7 +58,7 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
             </button>
 
             <ul>
-              {["Edit Profile", "Settings", "Logout"].map((option) => (
+              {["Edit Portfolio", "Settings", "Logout"].map((option) => (
                 <li
                   key={option}
                   className="p-4 hover:bg-gray-200 cursor-pointer"
