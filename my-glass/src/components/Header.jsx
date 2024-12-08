@@ -37,9 +37,9 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
           <MagnifyingGlassIcon className="h-6 w-6" />
         </button>
 
-        {/* Profile Icon */}
+        {/* Profile Icon with fixed dimensions */}
         <button onClick={handleProfileClick}>
-          <div className="h-8 w-8 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
+          <div className="h-10 w-10 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
             <UserIcon className="h-6 w-6 text-white" />
           </div>
         </button>
