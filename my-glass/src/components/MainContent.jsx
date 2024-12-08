@@ -1,11 +1,12 @@
 import React from "react";
 
-function MainContent() {
+const MainContent = () => {
   return (
-    <main className="p-6 flex-1 bg-gray-50">
-      <p className="text-gray-600 text-lg">Main Content Area</p>
-    </main>
+    <div>
+      <h1 className="text-4xl font-bold mb-4">Main Content Area</h1>
+      <p>This is where the main content for Lilu Glass will be displayed.</p>
+    </div>
   );
-}
+};
 
 export default MainContent;

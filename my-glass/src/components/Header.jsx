@@ -1,36 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
+import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 
-function Header({ toggleSidebar }) {
+const Header = ({ toggleSidebar, isSidebarOpen }) => {
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+
+  const handleProfileClick = () => {
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    alert(`${option} option clicked`);
+    setIsProfileDropdownOpen(false);  // Close dropdown after selecting an option
+  };
+
+  const handleCloseDropdown = () => {
+    setIsProfileDropdownOpen(false);
+  };
+
   return (
-    <header className="bg-white shadow py-4 px-6 flex justify-between items-center">
-      {/* Hamburger Icon */}
-      <button
-        onClick={toggleSidebar}
-        className="lg:hidden text-gray-700"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="h-6 w-6"
-        >
-          <path stroke="currentColor" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
+    <div className="w-full bg-gray-800 text-white flex items-center justify-between px-4 h-16 relative">
+      {/* Toggle Sidebar Button */}
+      <button onClick={toggleSidebar}>
+        {isSidebarOpen ? (
+          <XMarkIcon className="h-6 w-6" />
+        ) : (
+          <Bars3Icon className="h-6 w-6" />
+        )}
       </button>
 
-      <span className="font-bold text-gray-900 text-2xl">Header</span>
+      <span className="text-2xl font-bold ml-4">Lilu Glass</span>
 
-      {/* Search Bar */}
-      <div className="hidden md:block">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="px-4 py-2 rounded-lg bg-gray-100"
-        />
+      <div className="flex items-center space-x-4 relative">
+        {/* Search Icon */}
+        <button>
+          <MagnifyingGlassIcon className="h-6 w-6" />
+        </button>
+
+        {/* Profile Icon */}
+        <button onClick={handleProfileClick}>
+          <UserCircleIcon className="h-8 w-8" />
+        </button>
+
+        {/* Profile Dropdown */}
+        {isProfileDropdownOpen && (
+          <div className="absolute top-12 right-0 bg-white text-black shadow-lg rounded mt-2 w-48">
+            <button
+              onClick={handleCloseDropdown}
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+
+            <ul>
+              {["Edit Profile", "Settings", "Logout"].map((option) => (
+                <li
+                  key={option}
+                  className="p-4 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-    </header>
+    </div>
   );
-}
+};
 
 export default Header;
