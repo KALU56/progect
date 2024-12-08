@@ -1,20 +1,26 @@
-import { useState } from 'react'
+import React, { useState } from "react";
+import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-import Home from './components/Home';
-import Container from './components/continer';
-import './App.css'
+import MainContent from "./components/MainContent";
 
+
+
+import Footer from './components/footer';
 function App() {
-  const [count, setCount] = useState(0)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <>
-    <Header/>
-       
-  <Home/>
-  <Container/>
-    </>
-  )
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+      
+      {/* Main Content with Header */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
+        <MainContent />
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
