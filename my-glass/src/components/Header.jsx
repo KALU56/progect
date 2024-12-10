@@ -1,20 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Header = ({ toggleSidebar, isSidebarOpen }) => {
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const [isSearchActive, setIsSearchActive] = useState(false);
-
-  const handleProfileClick = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
-
-  const handleSearchClick = () => {
-    setIsSearchActive(!isSearchActive);
-  };
-
   return (
     <div className="w-full bg-gray-800 text-white flex items-center justify-between px-4 h-16">
+      <span className="text-2xl font-bold ml-4">Lilu Glass</span>
+
       {/* Sidebar Toggle Button */}
       <button onClick={toggleSidebar}>
         {isSidebarOpen ? (
@@ -24,14 +15,9 @@ const Header = ({ toggleSidebar, isSidebarOpen }) => {
         )}
       </button>
 
-      <span className="text-2xl font-bold ml-4">Lilu Glass</span>
-
-      <div className="flex items-center space-x-4">
-        {/* Search Icon */}
-        <button onClick={handleSearchClick}>
-          <MagnifyingGlassIcon className="h-6 w-6" />
-        </button>
-      </div>
+      <button className="ml-4">
+        <MagnifyingGlassIcon className="h-6 w-6" />
+      </button>
     </div>
   );
 };

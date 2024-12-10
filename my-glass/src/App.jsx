@@ -21,8 +21,8 @@ const App = () => {
         <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
         <div className="flex flex-1">
-          {/* Sidebar */}
-          {isSidebarOpen && <Sidebar />}
+          {/* Sidebar on the right */}
+          {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
 
           {/* Main Content */}
           <main className="flex-1 p-8 bg-gray-100">
