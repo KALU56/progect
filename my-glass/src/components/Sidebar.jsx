@@ -16,10 +16,10 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         <XMarkIcon className="h-6 w-6" />
       </button>
 
-      <h2 className="p-6 text-xl font-bold">Sidebar</h2>
+      <h2 className="p-6 text-xl font-bold"></h2>
       <nav>
         <ul>
-          {["Dashboard", "Index", "Profile", "Report", "Logout"].map((item) => (
+          {["Home", "Shop", "cart", "orders", "profile","support","logout","report"].map((item) => (
             <li key={item} className="p-4 hover:bg-gray-700 cursor-pointer">
               {item}
             </li>
