@@ -1,29 +1,20 @@
 import React from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
+const Sidebar = () => {
   return (
-    <div
-      className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-64 transform ${
-        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300`}
-    >
-      {/* Close Button inside Sidebar */}
-      <button
-        onClick={toggleSidebar}
-        className="absolute top-4 right-4 text-white"
-      >
-        <XMarkIcon className="h-6 w-6" />
-      </button>
-
-      <h2 className="p-6 text-xl font-bold"></h2>
-      <nav>
+    <div className="w-64 bg-gray-800 text-white h-full absolute inset-y-0 left-0 shadow-lg">
+      <nav className="mt-8">
         <ul>
-          {["Home", "Shop", "cart", "orders", "profile","support","logout","report"].map((item) => (
-            <li key={item} className="p-4 hover:bg-gray-700 cursor-pointer">
-              {item}
-            </li>
-          ))}
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/shop">Shop</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/cart">Cart</Link>
+          </li>
         </ul>
       </nav>
     </div>

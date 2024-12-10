@@ -1,31 +1,44 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import MainContent from "./components/MainContent";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Sidebar from './components/Sidebar';
+import Home from './components/pages/Home';
+import Shop from './components/pages/Shop';
+import Cart from './components/pages/Cart';
 
-function App() {
+const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <div className="h-screen overflow-hidden">
-      <Header toggleSidebar={toggleSidebar} />
-      <div className="flex h-full">
-        {/* Sidebar */}
-        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+    <Router>
+      <div className="flex flex-col h-screen">
+        {/* Header */}
+        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
 
-        {/* Main Content */}
-        <div
-          className={`flex-1 p-8 transition-all duration-300 ease-in-out ${
-            isSidebarOpen ? "ml-64" : "ml-0"
-          }`}
-        >
-          <MainContent />
+        <div className="flex flex-1">
+          {/* Sidebar */}
+          {isSidebarOpen && <Sidebar />}
+
+          {/* Main Content */}
+          <main className="flex-1 p-8 bg-gray-100">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </main>
         </div>
+
+        {/* Footer */}
+        <Footer />
       </div>
-    </div>
+    </Router>
   );
-}
+};
 
 export default App;
