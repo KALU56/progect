@@ -1,81 +1,91 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, Pressable } from 'react-native';
+import { View, Text, TextInput, Pressable, SafeAreaView, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import tw from 'twrnc';
 
-const AgentLoginScreen = () => {
+const AgentLoginScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onSignIn = () => {
-    // Handle sign in logic
+    console.log('Sign In Clicked');
   };
 
   return (
-    <SafeAreaView style={tw`flex-1 bg-[#F5E1DA]`}>
-      <View style={tw`flex-1 px-8 justify-center`}>
-        <Text style={tw`text-3xl font-bold text-gray-800 mb-6 text-center`}>Agent Login</Text>
-        <Text style={tw`text-gray-700 mb-8 text-center`}>Enter your details to access your account</Text>
+    <SafeAreaView style={tw`flex-1`}>
+      {/* Gradient Background */}
+      <LinearGradient
+        colors={['#D32F2F', '#4A148C']}
+        style={tw`flex-1 justify-center px-8`}
+      >
+        <View style={tw`bg-white p-6 rounded-3xl shadow-lg`}>
+          {/* Title */}
+          <Text style={tw`text-3xl font-bold text-gray-800 text-center mb-4`}>
+            Hello, Sign In!
+          </Text>
 
-        {/* Email Input */}
-        <TextInput
-          placeholder="Enter Email/Phone No"
-          style={tw`border border-gray-400 rounded-lg px-4 py-3 mb-4 bg-white text-gray-700 shadow-md`}
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-        />
+          {/* Email Input */}
+          <View style={tw`mb-4`}>
+            <Text style={tw`text-gray-700 mb-1 font-medium`}>Gmail</Text>
+            <TextInput
+              placeholder="Enter your email"
+              style={tw`border border-gray-300 rounded-lg px-4 py-3 bg-gray-100`}
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+            />
+          </View>
 
-        {/* Password Input */}
-        <TextInput
-          placeholder="Password"
-          style={tw`border border-gray-400 rounded-lg px-4 py-3 mb-4 bg-white text-gray-700 shadow-md`}
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
+          {/* Password Input */}
+          <View style={tw`mb-4`}>
+            <Text style={tw`text-gray-700 mb-1 font-medium`}>Password</Text>
+            <TextInput
+              placeholder="Enter your password"
+              style={tw`border border-gray-300 rounded-lg px-4 py-3 bg-gray-100`}
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+            />
+          </View>
 
-        {/* Trouble Signing In */}
-        <Pressable style={tw`self-end mb-6`}>
-          <Text style={tw`text-blue-700 font-medium`}>Forgot Password?</Text>
-        </Pressable>
+          {/* Forgot Password */}
+          <Pressable style={tw`self-end mb-4`}>
+            <Text style={tw`text-red-500 font-medium`}>Forgot password?</Text>
+          </Pressable>
 
-        {/* Sign In Button */}
-        <Pressable
-          style={tw`bg-blue-700 py-4 rounded-lg mb-8 shadow-lg`}
-          onPress={onSignIn}
-        >
-          <Text style={tw`text-white text-center font-bold text-lg`}>Sign In</Text>
-        </Pressable>
+          {/* Sign In Button */}
+          <Pressable onPress={onSignIn}>
+            <LinearGradient
+              colors={['#D32F2F', '#4A148C']}
+              style={tw`py-4 rounded-lg shadow-lg`}
+            >
+              <Text style={tw`text-white text-center font-bold text-lg`}>SIGN IN</Text>
+            </LinearGradient>
+          </Pressable>
 
-        {/* Social Login Divider */}
-        <View style={tw`flex-row items-center mb-6`}>
-          <View style={tw`flex-1 h-px bg-gray-400`} />
-          <Text style={tw`px-4 text-gray-600`}>Or sign in with</Text>
-          <View style={tw`flex-1 h-px bg-gray-400`} />
+          {/* Signup Link */}
+          <View style={tw`flex-row justify-center mt-6`}>
+            <Text style={tw`text-gray-600`}>Don't have an account? </Text>
+            <Pressable>
+              <Text style={tw`text-red-500 font-medium`}>Sign up</Text>
+            </Pressable>
+          </View>
         </View>
 
-        {/* Social Login Buttons */}
-        <View style={tw`flex-row justify-center gap-4`}>
-          <Pressable style={tw`p-3 rounded-full bg-white shadow-md`}>
+        {/* Social Login */}
+        <View style={tw`flex-row justify-center mt-8`}>
+          <Pressable style={tw`p-3 mx-2 bg-white rounded-full shadow`}>
             <Ionicons name="logo-google" size={24} color="#DB4437" />
           </Pressable>
-          <Pressable style={tw`p-3 rounded-full bg-white shadow-md`}>
-            <Ionicons name="logo-apple" size={24} color="black" />
+          <Pressable style={tw`p-3 mx-2 bg-white rounded-full shadow`}>
+            <Ionicons name="logo-twitter" size={24} color="#1DA1F2" />
           </Pressable>
-          <Pressable style={tw`p-3 rounded-full bg-white shadow-md`}>
+          <Pressable style={tw`p-3 mx-2 bg-white rounded-full shadow`}>
             <Ionicons name="logo-facebook" size={24} color="#4267B2" />
           </Pressable>
         </View>
-
-        {/* Sign Up Link */}
-        <View style={tw`flex-row justify-center mt-8`}>
-          <Text style={tw`text-gray-700`}>Don't have an account? </Text>
-          <Pressable>
-            <Text style={tw`text-blue-700 font-medium`}>Request Access</Text>
-          </Pressable>
-        </View>
-      </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 };
