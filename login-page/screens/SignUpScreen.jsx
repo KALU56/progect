@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   View, Text, TextInput, TouchableOpacity, StyleSheet, 
-  SafeAreaView, ScrollView, Alert 
+  SafeAreaView, ScrollView, Alert, Modal 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,6 +15,7 @@ const SignupScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);  // State for modal visibility
 
   const navigation = useNavigation();
 
@@ -35,6 +36,11 @@ const SignupScreen = () => {
     navigation.navigate('SignIn');
   };
 
+  const handleOptionSelect = () => {
+    setModalVisible(false); // Close the modal when an option is selected
+    navigation.navigate('Home');  // Navigate to the Home page
+  };
+
   return (
     <LinearGradient 
       colors={['#B76E79', '#800020']} 
@@ -48,7 +54,7 @@ const SignupScreen = () => {
             {/* Header */}
             <View style={styles.header}>
               <Text style={styles.title}>Create Your Account</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <Ionicons name="ellipsis-vertical" size={24} color="#800020" />
               </TouchableOpacity>
             </View>
@@ -119,6 +125,25 @@ const SignupScreen = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      {/* Modal for Options */}
+      <Modal
+        visible={isModalVisible}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <TouchableOpacity style={styles.modalButton} onPress={handleOptionSelect}>
+              <Text style={styles.modalButtonText}>Go to Home</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.modalButton} onPress={() => setModalVisible(false)}>
+              <Text style={styles.modalButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </LinearGradient>
   );
 };
@@ -195,6 +220,33 @@ const styles = StyleSheet.create({
   },
   signinLink: {
     color: '#800020',
+    fontWeight: 'bold',
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Semi-transparent background
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  modalButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#800020',
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
