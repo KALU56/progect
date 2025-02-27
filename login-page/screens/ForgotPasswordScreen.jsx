@@ -57,12 +57,62 @@ const ForgotPasswordScreen = () => {
   );
 };
 
+// ForgotPasswordScreen.js
 const styles = StyleSheet.create({
-  // Reuse existing styles from SignInScreen
-  ...require('./SignInScreen').styles,
+  container: {
+    flex: 1,
+  },
+  safeArea: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  mainContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 25,
+    marginHorizontal: 20,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+  },
   header: {
-    ...require('./SignInScreen').styles.header,
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#800020',
+  },
+  inputContainer: {
+    marginVertical: 10,
+  },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingVertical: 12,
+    fontSize: 16,
+    marginBottom: 15,
+  },
+  signInButton: {
+    backgroundColor: '#800020',
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  signInButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
