@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native'; // Add this import
+import { useNavigation } from '@react-navigation/native';
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation(); // Add this line
+  const navigation = useNavigation();
 
   return (
     <LinearGradient 
@@ -20,7 +20,7 @@ const WelcomeScreen = () => {
           {/* Sign In Button */}
           <TouchableOpacity 
             style={styles.button}
-            onPress={() => navigation.navigate('SignIn')} // Add this
+            onPress={() => navigation.navigate('SignIn')}
           >
             <Text style={styles.buttonText}>SIGN IN</Text>
           </TouchableOpacity>
@@ -28,12 +28,12 @@ const WelcomeScreen = () => {
           {/* Sign Up Button */}
           <TouchableOpacity 
             style={styles.button}
-            onPress={() => navigation.navigate('SignUp')} // Add this
+            onPress={() => navigation.navigate('SignUp')}
           >
             <Text style={styles.buttonText}>SIGN UP</Text>
           </TouchableOpacity>
 
-          {/* Social Login Section with Text and Icons */}
+          {/* Social Login Section */}
           <View style={styles.socialContainer}>
             <Text style={styles.socialText}>Login with Social Media</Text>
             <View style={styles.socialIcons}>
@@ -98,14 +98,26 @@ const styles = StyleSheet.create({
   socialIcons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '60%',
+    width: '70%',
   },
   socialIcon: {
-    padding: 10,
+    width: 50,
+    height: 50,
+    borderRadius: 25, // Makes it circular
+    backgroundColor: 'white', // White background for contrast
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 10, // Adds spacing between icons
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 5, // Adds shadow effect on Android
   },
   icon: {
     width: 30,
     height: 30,
+    resizeMode: 'contain',
   },
 });
 
