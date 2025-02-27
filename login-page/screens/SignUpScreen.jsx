@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   View, Text, TextInput, TouchableOpacity, StyleSheet, 
-  SafeAreaView, ScrollView 
+  SafeAreaView, ScrollView, Alert 
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,6 +18,23 @@ const SignupScreen = () => {
 
   const navigation = useNavigation();
 
+  const validateInputs = () => {
+    if (!fullName.trim()) return Alert.alert("Error", "Full Name is required.");
+    if (!phone.match(/^\d{10}$/)) return Alert.alert("Error", "Enter a valid 10-digit phone number.");
+    if (!email.match(/^\S+@\S+\.\S+$/)) return Alert.alert("Error", "Enter a valid email address.");
+    if (password.length < 6) return Alert.alert("Error", "Password must be at least 6 characters.");
+    if (password !== confirmPassword) return Alert.alert("Error", "Passwords do not match.");
+
+    // Proceed with signup logic
+    handleSignup();
+  };
+
+  const handleSignup = () => {
+    // Placeholder for actual signup logic
+    Alert.alert("Success", "Account created successfully!");
+    navigation.navigate('SignIn');
+  };
+
   return (
     <LinearGradient 
       colors={['#B76E79', '#800020']} 
@@ -27,16 +44,16 @@ const SignupScreen = () => {
     >
       <SafeAreaView style={styles.safeArea}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <View style={styles.innerContainer}>
-            {/* Title and 3-dot menu */}
+          <View style={styles.mainContainer}>
+            {/* Header */}
             <View style={styles.header}>
               <Text style={styles.title}>Create Your Account</Text>
               <TouchableOpacity>
-                <Ionicons name="ellipsis-vertical" size={24} color="white" />
+                <Ionicons name="ellipsis-vertical" size={24} color="#800020" />
               </TouchableOpacity>
             </View>
 
-            {/* Input Fields Container */}
+            {/* Input Fields */}
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
@@ -59,7 +76,7 @@ const SignupScreen = () => {
                 onChangeText={setEmail}
               />
               
-              {/* Password Field */}
+              {/* Password Fields */}
               <View style={styles.passwordContainer}>
                 <TextInput
                   style={styles.inputPassword}
@@ -69,15 +86,10 @@ const SignupScreen = () => {
                   onChangeText={setPassword}
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                  <Ionicons 
-                    name={showPassword ? "eye-off" : "eye"} 
-                    size={24} 
-                    color="#800020" 
-                  />
+                  <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="#800020" />
                 </TouchableOpacity>
               </View>
 
-              {/* Confirm Password Field */}
               <View style={styles.passwordContainer}>
                 <TextInput
                   style={styles.inputPassword}
@@ -87,21 +99,17 @@ const SignupScreen = () => {
                   onChangeText={setConfirmPassword}
                 />
                 <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-                  <Ionicons 
-                    name={showConfirmPassword ? "eye-off" : "eye"} 
-                    size={24} 
-                    color="#800020" 
-                  />
+                  <Ionicons name={showConfirmPassword ? "eye-off" : "eye"} size={24} color="#800020" />
                 </TouchableOpacity>
               </View>
             </View>
 
             {/* Sign Up Button */}
-            <TouchableOpacity style={styles.signupButton}>
+            <TouchableOpacity style={styles.signupButton} onPress={validateInputs}>
               <Text style={styles.signupButtonText}>SIGN UP</Text>
             </TouchableOpacity>
 
-            {/* Sign In Link at the Bottom Right */}
+            {/* Sign In Link */}
             <View style={styles.signinContainer}>
               <Text style={styles.signinText}>Do you have an account?</Text>
               <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
@@ -115,44 +123,40 @@ const SignupScreen = () => {
   );
 };
 
+// Styles
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  scrollView: {
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
-  container: {
-    flex: 1,
-  },
-  innerContainer: {
-    padding: 20,
+  container: { flex: 1 },
+  safeArea: { flex: 1 },
+  scrollView: { flexGrow: 1, justifyContent: 'center' },
+  mainContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 25,
+    marginHorizontal: 20,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#800020',
   },
   inputContainer: {
-    backgroundColor: '#ffffff',
-    padding: 20,
-    borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
+    marginVertical: 10,
   },
   input: {
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingVertical: 10,
+    paddingVertical: 12,
     fontSize: 16,
     marginBottom: 15,
   },
@@ -161,20 +165,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    paddingVertical: 12,
     marginBottom: 15,
   },
   inputPassword: {
     flex: 1,
-    paddingVertical: 10,
     fontSize: 16,
   },
   signupButton: {
-    backgroundColor: '#B76E79',
-    paddingVertical: 15,
-    borderRadius: 8,
-    width: '100%',
+    backgroundColor: '#800020',
+    paddingVertical: 12,
+    borderRadius: 10,
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   signupButtonText: {
     color: 'white',
@@ -187,11 +190,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   signinText: {
-    color: 'white',
+    color: '#666',
     marginRight: 5,
   },
   signinLink: {
-    color: 'white',
+    color: '#800020',
     fontWeight: 'bold',
   },
 });
