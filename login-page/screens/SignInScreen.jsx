@@ -9,7 +9,7 @@ const SignInScreen = () => {
 
   const handleSignIn = () => {
     // Add your sign-in logic here
-    navigation.navigate('Welcome');
+    navigation.navigate('Home'); 
   };
 
   return (
