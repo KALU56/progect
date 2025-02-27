@@ -4,12 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 const WelcomeScreen = () => {
   return (
-    <LinearGradient colors={['#D2B48C', '#8B4513']} style={styles.container}>
+    <LinearGradient 
+      colors={['#D2B48C', '#8B4513']} 
+      start={{ x: 0, y: 0 }} 
+      end={{ x: 1, y: 0 }} 
+      style={styles.container}
+    >
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
-       
-
-          {/* Welcome Text */}
           <Text style={styles.welcomeText}>Welcome Back</Text>
 
           {/* Sign In Button */}
@@ -54,11 +56,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-  // logo: {
-  //   width: 100,
-  //   height: 100,
-  //   marginBottom: 40,
-  // },
   welcomeText: {
     color: 'white',
     fontSize: 24,
@@ -81,7 +78,6 @@ const styles = StyleSheet.create({
   },
   socialText: {
     color: 'white',
-   
     paddingBottom: 90,
   },
   socialContainer: {
