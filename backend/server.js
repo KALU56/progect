@@ -1,18 +1,29 @@
+// In your backend/server.js
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const userRoutes = require('./routes/userRoutes');
+const router = express.Router();
+const User = require('./models/User');
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+// Test Create
+router.post('/test-create', async (req, res) => {
+  try {
+    const newUser = new User({
+      fullName: "Test User",
+      email: "test@example.com",
+      password: "test123"
+    });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log('MongoDB connection error:', err));
-
-app.use('/api/users', userRoutes);
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+// Test Read
+router.get('/test-read', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
