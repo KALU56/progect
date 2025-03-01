@@ -1,29 +1,23 @@
-// In your backend/server.js
 const express = require('express');
-const router = express.Router();
-const User = require('./models/User');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db'); // Ensure this path is correct
+const authRoutes = require('./routes/authRoutes'); // Ensure this path is correct
 
-// Test Create
-router.post('/test-create', async (req, res) => {
-  try {
-    const newUser = new User({
-      fullName: "Test User",
-      email: "test@example.com",
-      password: "test123"
-    });
-    await newUser.save();
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+dotenv.config(); // Load environment variables
 
-// Test Read
-router.get('/test-read', async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+const app = express(); // Initialize Express app
+
+// Middleware
+app.use(express.json()); // Parse JSON requests
+app.use(cors()); // Enable CORS
+
+// Connect to MongoDB
+connectDB();
+
+// Routes
+app.use('/api/auth', authRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
