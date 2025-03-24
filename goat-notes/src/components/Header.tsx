@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { shadow } from '@/style/utiles';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import DarkModeToggle from './DarkModeToogle';
 
 function Header() {
   const user = null;
@@ -29,17 +30,18 @@ function Header() {
         ) : (
           <>
             <Button asChild>
-              <Link href="/signup"className='hidden sm:block'>
-              signup
+              <Link href="/signup" className="hidden sm:block">
+                signup
               </Link>
             </Button>
             <Button asChild variant={'outline'}>
               <Link href="/login">
-               Login
+                Login
               </Link>
             </Button>
           </>
         )}
+        <DarkModeToggle />
       </div>
     </header>
   );
