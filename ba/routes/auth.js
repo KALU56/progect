@@ -11,10 +11,10 @@ const router = express.Router();
 const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 router.post("/signup", async (req, res) => {
-  const { email, password, confirmPassword, phone } = req.body;
+  const { fullName, email, password, confirmPassword, phone } = req.body;
 
   // Check if all fields are provided
-  if (!email || !password || !confirmPassword || !phone) {
+  if (!fullName || !email || !password || !confirmPassword || !phone) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -49,6 +49,7 @@ router.post("/signup", async (req, res) => {
 
     // Create new user
     const newUser = new User({
+      fullName,
       email,
       password: hashedPassword,
       phone,
@@ -64,12 +65,14 @@ router.post("/signup", async (req, res) => {
     res.status(201).json({
       message: "User registered successfully",
       token,
-      user: { email: newUser.email, phone: newUser.phone },
+      user: { fullName: newUser.fullName, email: newUser.email, phone: newUser.phone },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// Sign-in Route
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
@@ -99,12 +102,11 @@ router.post("/signin", async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token,
-      user: { email: user.email, phone: user.phone },
+      user: { fullName: user.fullName, email: user.email, phone: user.phone },
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 module.exports = router;
